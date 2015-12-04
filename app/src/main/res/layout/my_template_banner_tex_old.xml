@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+ * Example banner template
+ * Can be used to show a text in-app
+-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="250dp"
+    android:layout_height="wrap_content"
+    android:background="#ff3333"
+    android:orientation="vertical"
+              android:layout_gravity="center_horizontal">
+
+    <TextView
+        android:id="@id/com_ad4screen_sdk_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:lines="1"
+        android:maxLines="1"
+        android:textColor="#ffffff"
+        android:text="Test Message Title"
+        android:gravity="center_horizontal" />
+
+    <TextView
+        android:id="@id/com_ad4screen_sdk_body"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:textColor="#ffffff"
+        android:text="Test Message Body"/>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView"
+        android:src="@drawable/specialoffer" />
+
+</LinearLayout>
