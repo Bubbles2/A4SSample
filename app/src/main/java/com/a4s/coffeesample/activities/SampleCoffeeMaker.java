@@ -44,8 +44,14 @@ public class SampleCoffeeMaker extends Activity {
 			@Override
 			public void onResult(InApp inApp)
 			{
+
+
+
+
+
+
 		//		if(inApp.getDisplayTemplate().contains("com_ad4screen")) {
-					if(inApp.getDisplayTemplate().contains("my_template")) {
+					if(inApp.getDisplayTemplate().contains("a4s_info")) {
 
 
 						FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
@@ -55,6 +61,12 @@ public class SampleCoffeeMaker extends Activity {
 					//
 					//TextView tvbody = (TextView) findViewById(R.id.com_ad4screen_sdk_title);
 					//tvbody.setText("My Data");
+						TextView tv = (TextView) findViewById(R.id.textView);
+						int i = inApp.getContainer();
+
+						//TextView tvbody = (TextView)findViewById(inApp.getContainer()).findViewById(R.id.textView);
+//						tvbody.setText("mother fucker");
+
 
 					A4S.get(getApplicationContext()).setOverlayPosition(params);
 				}
@@ -69,9 +81,32 @@ public class SampleCoffeeMaker extends Activity {
 			}
 		}, R.layout.com_ad4screen_sdk_overlay);
 
-		findViewById(R.id.btnStartBrew).setOnClickListener(new OnClickListener() {
+		A4S.get(getApplicationContext()).setInAppDisplayedCallback(new A4S.Callback<InApp>()
+		{
 			@Override
-			public void onClick(View v) {
+			public void onResult(InApp inApp)
+			{
+				TextView tv = (TextView) findViewById(R.id.textView);
+				int i = inApp.getContainer();
+				View view = findViewById(inApp.getContainer());
+				tv.setText("mother fucker");
+
+				//TextView tvbody = (TextView)findViewById(inApp.getContainer()).findViewById(R.id.textView);
+				//tvbody.setText("mother fucker");
+			}
+
+			@Override
+			public void onError(int i, String s)
+			{
+
+			}
+		});
+
+		findViewById(R.id.btnStartBrew).setOnClickListener(new OnClickListener()
+		{
+			@Override
+			public void onClick(View v)
+			{
 				A4S.get(SampleCoffeeMaker.this).trackEvent(Long.parseLong("1000"), "Start");
 				startActivity(new Intent(SampleCoffeeMaker.this, SampleMakeCoffee.class));
 			}

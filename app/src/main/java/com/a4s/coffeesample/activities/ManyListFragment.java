@@ -5,6 +5,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
@@ -20,7 +21,12 @@ import java.util.concurrent.atomic.AtomicInteger;
  * Activities containing this fragment MUST implement the {@link Callbacks}
  * interface.
  */
-public class ManyListFragment extends ListFragment {
+public class ManyListFragment extends ListFragment implements AbsListView.OnScrollListener
+{
+    public ManyListFragment()
+    {
+        super();
+    }
 
     private AbsListView.LayoutParams frameLayoutParams = new AbsListView.LayoutParams(
             ViewGroup.LayoutParams.MATCH_PARENT,
@@ -69,6 +75,14 @@ public class ManyListFragment extends ListFragment {
             }
         };
         setListAdapter( adapter );
+
+    }
+    @Override
+    public void onActivityCreated (Bundle savedInstanceState){
+        // Always call the superclass so it can save the view hierarchy state
+        super.onCreate(savedInstanceState);
+
+        getListView().setOnScrollListener(this);
     }
 
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
@@ -88,4 +102,18 @@ public class ManyListFragment extends ListFragment {
         }
     }
     private static final AtomicInteger sNextGeneratedId = new AtomicInteger(1);
+
+
+
+    @Override
+    public void onScrollStateChanged(AbsListView view, int scrollState)
+    {
+
+    }
+
+    @Override
+    public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount)
+    {
+
+    }
 }
