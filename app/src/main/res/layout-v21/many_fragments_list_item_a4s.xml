@@ -21,6 +21,23 @@
         android:text="Data-A4S"
          android:textSize="16sp"/>
     //
-    <include layout="@layout/com_ad4screen_sdk_banner"/>
+    <LinearLayout
+        android:id="@+id/a4msg1"
+        android:layout_width="wrap_content"
+        android:padding="20dp"
+        android:background="#FF0000"
+        android:layout_height="wrap_content">
+        <include layout="@layout/com_ad4screen_sdk_banner"/>
+    </LinearLayout>
+    <!--<LinearLayout-->
+        <!--android:id="@+id/a4msg2"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:padding="20dp"-->
+        <!--android:background="#00FF00"-->
+        <!-->-->
+        <!--<include layout="@layout/com_ad4screen_sdk_banner"/>-->
+    <!--</LinearLayout>-->
+
 
 </LinearLayout>

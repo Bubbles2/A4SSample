@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -45,7 +46,8 @@ import com.ad4screen.sdk.InApp;
 			{
 
 
-
+				//LinearLayout lla = (LinearLayout) findViewById(R.id.a4msg1);
+				//lla.setVisibility(View.GONE);
 
 
 
@@ -78,19 +80,23 @@ import com.ad4screen.sdk.InApp;
 			{
 
 			}
-		}, R.layout.com_ad4screen_sdk_overlay);
+		}, R.layout.com_ad4screen_sdk_banner);
+		//}, R.layout.com_ad4screen_sdk_overlay);
 
 		A4S.get(getApplicationContext()).setInAppDisplayedCallback(new A4S.Callback<InApp>()
 		{
 			@Override
 			public void onResult(InApp inApp)
 			{
+
 				TextView tv = (TextView) findViewById(R.id.textView);
 				int i = inApp.getContainer();
 				View view = findViewById(inApp.getContainer());
-				tv.setText("mother fucker");
-				RelativeLayout rr = (RelativeLayout) findViewById(R.id.inf_triangle);
-				rr.setVisibility(View.GONE);
+				tv.setText("This is my second message \n on line 2 \n more messages \n xxxxxx");
+				//RelativeLayout rr = (RelativeLayout) findViewById(R.id.inf_triangleTL);
+				//rr.setRotation(-90.0f);
+
+				//rr.setVisibility(View.GONE);
 				//TextView tvbody = (TextView)findViewById(inApp.getContainer()).findViewById(R.id.textView);
 				//tvbody.setText("mother fucker");
 			}
