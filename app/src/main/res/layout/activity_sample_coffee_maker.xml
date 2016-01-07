@@ -48,6 +48,14 @@
             android:layout_marginTop="15dp"
             android:onClick="showList"
             android:text="Show List" />
+        <Button
+            android:layout_width="81dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="250dp"
+            android:text="Close"
+            android:id="@+id/btnClose"
+            android:layout_gravity="center_horizontal"
+            android:onClick="closeindow" />
 
     </LinearLayout>
 
