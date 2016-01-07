@@ -4,10 +4,7 @@ xmlns:android="http://schemas.android.com/apk/res/android"
 xmlns:tools="http://schemas.android.com/tools"
 android:layout_width="wrap_content"
 android:layout_height="wrap_content"
-android:paddingLeft="@dimen/activity_horizontal_margin"
-android:paddingRight="@dimen/activity_horizontal_margin"
-android:paddingTop="@dimen/activity_vertical_margin"
-android:paddingBottom="@dimen/activity_vertical_margin"
+android:id="@+id/ibev1"
 tools:context="com.a4s.coffeesample.activities.MyListActivity">
 
     <RelativeLayout
@@ -18,6 +15,14 @@ tools:context="com.a4s.coffeesample.activities.MyListActivity">
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         />
+    <RelativeLayout
+        android:id="@+id/inf_triangleTR"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="@drawable/triangle"
+        android:layout_alignParentTop="true"
+        android:layout_alignRight="@+id/msg_block"
+        android:layout_alignEnd="@+id/msg_block" />
 
     <LinearLayout
         android:id="@+id/msg_block"
@@ -36,7 +41,7 @@ tools:context="com.a4s.coffeesample.activities.MyListActivity">
     android:layout_width="150dp"
     android:layout_height="wrap_content"
     android:text="This a very special offer for new users. Click Here to take advantage of this offer. It only lasts one week."
-    android:id="@+id/textView"
+    android:id="@+id/textViewDF1"
     android:layout_below="@+id/inf_triangle"
     android:layout_toRightOf="@+id/imageView2"
      />

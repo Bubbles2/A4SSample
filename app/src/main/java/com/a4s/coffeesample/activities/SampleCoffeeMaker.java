@@ -1,8 +1,11 @@
 package com.a4s.coffeesample.activities;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
+import android.view.Display;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -47,7 +50,8 @@ public class SampleCoffeeMaker extends Activity {
 		//
 		//A4S.get(this).trackEvent(1002, "Comments2");
 		//A4S.get(this).trackEvent(1001, "Comments");
-		A4S.get(this).trackEvent(1005, "Comments");
+		//A4S.get(this).trackEvent(1005, "Comments");
+		new Thread(new CheckForEvents(this)).start();
 
 
 
@@ -64,51 +68,51 @@ public class SampleCoffeeMaker extends Activity {
 
 
 
-		A4S.get(this).setInAppReadyCallback(false, new A4S.Callback<InApp>()
-		{
-
-
-
-			@Override
-			public void onResult(InApp inApp)
-			{
-		//		if(inApp.getDisplayTemplate().contains("com_ad4screen")) {
-				//In-App id
-				String id = inApp.getId();
-				String dname = inApp.getDisplayTemplate();
-				//In-App custom parameters
-				HashMap<String,String> customParameters = inApp.getCustomParameters();
-
-					if(inApp.getDisplayTemplate().contains("a4s_info")) {
-
-
-						FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
-																				   ViewGroup.LayoutParams.WRAP_CONTENT, Gravity.TOP);
-
-						//params.setMargins(leftpos,toppos+400,0,0);
-						params.setMargins(400,400,0,0);
-					//
-					//TextView tvbody = (TextView) findViewById(R.id.com_ad4screen_sdk_title);
-					//tvbody.setText("My Data");
-						TextView tv = (TextView) findViewById(R.id.textView);
-						int i = inApp.getContainer();
-
-						//TextView tvbody = (TextView)findViewById(inApp.getContainer()).findViewById(R.id.textView);
-//						tvbody.setText("mother fucker");
-
-						A4S.get(getApplicationContext()).setOverlayPosition(params);
-				}
-
-
-			}
-
-			@Override
-			public void onError(int i, String s)
-			{
-				String ss = "ss";
-			}
-			// This is how we can overlay multiple messages
-		}, R.layout.com_ad4screen_sdk_overlay);
+//		A4S.get(this).setInAppReadyCallback(false, new A4S.Callback<InApp>()
+//		{
+//
+//
+//
+//			@Override
+//			public void onResult(InApp inApp)
+//			{
+//		//		if(inApp.getDisplayTemplate().contains("com_ad4screen")) {
+//				//In-App id
+//				String id = inApp.getId();
+//				String dname = inApp.getDisplayTemplate();
+//				//In-App custom parameters
+//				HashMap<String,String> customParameters = inApp.getCustomParameters();
+//
+//					if(inApp.getDisplayTemplate().contains("a4s_info")) {
+//
+//
+//						FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
+//																				   ViewGroup.LayoutParams.WRAP_CONTENT, Gravity.TOP);
+//
+//						//params.setMargins(leftpos,toppos+400,0,0);
+//						params.setMargins(400,400,0,0);
+//					//
+//					//TextView tvbody = (TextView) findViewById(R.id.com_ad4screen_sdk_title);
+//					//tvbody.setText("My Data");
+//						TextView tv = (TextView) findViewById(R.id.textView);
+//						int i = inApp.getContainer();
+//
+//						//TextView tvbody = (TextView)findViewById(inApp.getContainer()).findViewById(R.id.textView);
+////						tvbody.setText("mother fucker");
+//
+//						A4S.get(getApplicationContext()).setOverlayPosition(params);
+//				}
+//
+//
+//			}
+//
+//			@Override
+//			public void onError(int i, String s)
+//			{
+//				String ss = "ss";
+//			}
+//			// This is how we can overlay multiple messages
+//		}, R.layout.com_ad4screen_sdk_overlay);
 //
 //		A4S.get(getApplicationContext()).setInAppDisplayedCallback(new A4S.Callback<InApp>()
 //		{
@@ -193,5 +197,78 @@ public class SampleCoffeeMaker extends Activity {
 	public void closeindow(View view)
 	{
 		A4S.get(this).setView("XXX");
+	}
+
+	private class CheckForEvents implements Runnable {
+		// This does
+		Context c;
+
+		public CheckForEvents(Context c)
+		{
+			this.c = c;
+		}
+
+		@Override
+		public void run() {
+			A4S.get(c).trackEvent(1001, "Comments");
+			//
+			// Set Screen position , Field contents do not seem to be available here
+			A4S.get(c).setInAppReadyCallback(false, new A4S.Callback<InApp>()
+			{
+				@Override
+				public void onResult(InApp inApp)
+				{
+					//
+					HashMap<String,String> s = inApp.getCustomParameters();
+					//
+					if(inApp.getDisplayTemplate().contains("a4s_info"))
+					{
+						FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT, Gravity.TOP);
+						params.setMargins(40, 400, 0, 0);
+						A4S.get(getApplicationContext()).setOverlayPosition(params);
+					}
+				}
+
+				@Override
+				public void onError(int i, String s)
+				{
+
+				}
+			});
+
+			A4S.get(c).setInAppDisplayedCallback(new A4S.Callback<InApp>(){
+
+				@Override
+				public void onResult(InApp inApp)
+				{
+
+					HashMap<String,String> sss = inApp.getCustomParameters();
+					TextView tvbody = (TextView) ((SampleCoffeeMaker) c).findViewById(R.id.textViewDF1);
+					tvbody.setText("This message has been modified in code");
+					//
+					Display display = getWindowManager().getDefaultDisplay();
+					// Need to measure parent first
+					View s2 = findViewById(R.id.msg_block); // Screen is a container layout
+					s2.measure(display.getWidth(), display.getHeight());
+					View c = findViewById(R.id.textViewDF1);
+					int w = c.getMeasuredWidth();
+					// Get real density this is probably better for conversion
+					float den = c.getResources().getDisplayMetrics().density;
+					// Convert to DP
+					DisplayMetrics displayMetrics = c.getResources().getDisplayMetrics();
+					int dp = Math.round(c.getMeasuredWidth() / (displayMetrics.xdpi / DisplayMetrics.DENSITY_DEFAULT));
+					String s = "ss";
+				}
+
+				@Override
+				public void onError(int i, String s)
+				{
+
+				}
+			});
+
+
+		}
+
 	}
 }
