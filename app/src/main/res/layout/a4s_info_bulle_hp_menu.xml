@@ -40,7 +40,7 @@ tools:context="com.a4s.coffeesample.activities.MyListActivity">
     <TextView
     android:layout_width="150dp"
     android:layout_height="wrap_content"
-    android:text="This a very special offer for new users. Click Here to take advantage of this offer. It only lasts one week."
+    android:text="1001 - This a very special offer for new users. Click Here to take advantage of this offer. It only lasts one week."
     android:id="@+id/textViewDF1"
     android:layout_below="@+id/inf_triangle"
     android:layout_toRightOf="@+id/imageView2"

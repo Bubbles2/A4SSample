@@ -12,8 +12,8 @@ tools:context="com.a4s.coffeesample.activities.MyListActivity">
         android:layout_height="50dp"
         android:background="@drawable/triangle"
         android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        />
+        android:layout_alignRight="@+id/msg_block"
+        android:layout_alignEnd="@+id/msg_block" />
 
     <LinearLayout
         android:id="@+id/msg_block"
@@ -31,7 +31,7 @@ tools:context="com.a4s.coffeesample.activities.MyListActivity">
     <TextView
     android:layout_width="150dp"
     android:layout_height="wrap_content"
-    android:text="This a NO Event NO Event NO Event text for new users. Click Here to take advantage of this offer. It only lasts one week."
+    android:text="1003 - This a very special offer for new users. Click Here to take advantage of this offer. It only lasts one week."
     android:id="@+id/textView"
     android:layout_below="@+id/inf_triangle"
     android:layout_toRightOf="@+id/imageView2"

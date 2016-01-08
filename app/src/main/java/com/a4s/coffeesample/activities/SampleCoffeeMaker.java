@@ -53,10 +53,24 @@ public class SampleCoffeeMaker extends Activity {
 		//A4S.get(this).trackEvent(1005, "Comments");
 		new Thread(new CheckForEvents(this)).start();
 
-
-
-
-
+// Get width A4S approach
+//		A4S.get(context).setInAppDisplayedCallback(new Callback<InApp>() {
+//			@Override
+//			public void onResult(InApp result) {
+//				final View inAppDisplayedView = findViewById(R.id.ibev1);
+//				if (inAppDisplayedView) {
+//					inAppDisplayedView.post(new Runnable() {
+//						@Override
+//						public void run() {
+//							int width = inAppDisplayedView.getWidth();
+//							Toast.makeText(context, "Width of inAppDisplayedView: " + width, Toast.LENGTH_SHORT).show();
+//						}
+//					});
+//				}
+//			}
+//
+//			...
+//		});
 
 		//
 
@@ -210,7 +224,11 @@ public class SampleCoffeeMaker extends Activity {
 
 		@Override
 		public void run() {
+			// this code is in a thread for when we manage message prioritys
+			// because we will need to wait for a call back
 			A4S.get(c).trackEvent(1001, "Comments");
+			A4S.get(c).trackEvent(1002, "Comments");
+			A4S.get(c).trackEvent(1003, "Comments");
 			//
 			// Set Screen position , Field contents do not seem to be available here
 			A4S.get(c).setInAppReadyCallback(false, new A4S.Callback<InApp>()
@@ -241,23 +259,23 @@ public class SampleCoffeeMaker extends Activity {
 				@Override
 				public void onResult(InApp inApp)
 				{
-
-					HashMap<String,String> sss = inApp.getCustomParameters();
-					TextView tvbody = (TextView) ((SampleCoffeeMaker) c).findViewById(R.id.textViewDF1);
-					tvbody.setText("This message has been modified in code");
-					//
-					Display display = getWindowManager().getDefaultDisplay();
-					// Need to measure parent first
-					View s2 = findViewById(R.id.msg_block); // Screen is a container layout
-					s2.measure(display.getWidth(), display.getHeight());
-					View c = findViewById(R.id.textViewDF1);
-					int w = c.getMeasuredWidth();
-					// Get real density this is probably better for conversion
-					float den = c.getResources().getDisplayMetrics().density;
-					// Convert to DP
-					DisplayMetrics displayMetrics = c.getResources().getDisplayMetrics();
-					int dp = Math.round(c.getMeasuredWidth() / (displayMetrics.xdpi / DisplayMetrics.DENSITY_DEFAULT));
-					String s = "ss";
+//	Test dynamic settings code is ok
+//					HashMap<String,String> sss = inApp.getCustomParameters();
+//					TextView tvbody = (TextView) ((SampleCoffeeMaker) c).findViewById(R.id.textViewDF1);
+//					tvbody.setText("This message has been modified in code");
+//					//
+//					Display display = getWindowManager().getDefaultDisplay();
+//					// Need to measure parent first
+//					View s2 = findViewById(R.id.msg_block); // Screen is a container layout
+//					s2.measure(display.getWidth(), display.getHeight());
+//					View c = findViewById(R.id.textViewDF1);
+//					int w = c.getMeasuredWidth();
+//					// Get real density this is probably better for conversion
+//					float den = c.getResources().getDisplayMetrics().density;
+//					// Convert to DP
+//					DisplayMetrics displayMetrics = c.getResources().getDisplayMetrics();
+//					int dp = Math.round(c.getMeasuredWidth() / (displayMetrics.xdpi / DisplayMetrics.DENSITY_DEFAULT));
+//					String s = "ss";
 				}
 
 				@Override
